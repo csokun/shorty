@@ -10,11 +10,11 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'shorty:$(build.buildId)'
+  imageName: '$(dockerId)/shorty:$(build.buildId)'
 
 steps:
 - script: |
     docker build -f Dockerfile -t $(imageName) .
     docker login -u $(dockerId) -p $(dockerPassword)
-    docker push $(dockerId)/$(imageName)
+    docker push $(imageName)
   displayName: 'docker build'
